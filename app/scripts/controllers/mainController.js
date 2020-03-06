@@ -11,8 +11,16 @@ angular.module('ethExplorer')
 	// get latest 50 blocks
 	$scope.blocks = [];
 	for (var i = 0; i < maxBlocks; ++i) {
-	    $scope.blocks.push(web3.eth.getBlock(blockNum - i));
+        $scope.blocks.push(web3.eth.getBlock(blockNum - i));
 	}
+
+	    //格式化的处理：
+        $scope.blocks = $scope.blocks.map(function(item,index) {
+            var newValue = '' + item.timestamp +'\t'+ new Date(item.timestamp*1000).toUTCString();
+            item.timestamp=newValue;
+            return item;//如果不返回则输出： Array [undefined, undefined, undefined]
+        });
+
 	
         $scope.processRequest = function() {
              var requestStr = $scope.ethRequest.split('0x').join('');
