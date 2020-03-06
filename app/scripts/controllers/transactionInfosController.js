@@ -48,7 +48,10 @@ angular.module('ethExplorer')
                     if($scope.blockNumber!==undefined){
                         var info = web3.eth.getBlock($scope.blockNumber);
                         if(info!==undefined){
-                            $scope.time = info.timestamp;
+                            // item.timestamp=newValue;
+                            var newValue = '' + info.timestamp +'\t'+
+                                new Date(info.timestamp*1000 + 8 * 3600 * 1000).toJSON().substr(0, 19).replace('T', ' ').replace(/-/g, '-');
+                            $scope.time = newValue;
                         }
                     }
 
