@@ -16,7 +16,8 @@ angular.module('ethExplorer')
 
 	    //格式化的处理：
         $scope.blocks = $scope.blocks.map(function(item,index) {
-            var newValue = '' + item.timestamp +'\t'+ new Date(item.timestamp*1000).toUTCString();
+            var newValue = '' + item.timestamp +'\t'+
+                new Date(item.timestamp*1000 + 8 * 3600 * 1000).toJSON().substr(0, 19).replace('T', ' ').replace(/-/g, '-');
             item.timestamp=newValue;
             return item;//如果不返回则输出： Array [undefined, undefined, undefined]
         });
